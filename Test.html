@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANZUR TEST</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #111827, #1e3a8a);
+    color: #111827;
+    min-height: 100vh;
+}
+
+.container {
+    width: min(900px, 94%);
+    margin: auto;
+    padding: 25px 0 50px;
+}
+
+.card {
+    background: white;
+    border-radius: 22px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.logo {
+    text-align: center;
+    color: white;
+    padding: 25px 0 5px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 42px;
+    letter-spacing: 2px;
+}
+
+.logo p {
+    margin-top: 8px;
+    opacity: .85;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 17px;
+    margin: 8px 0 15px;
+}
+
+button {
+    border: 0;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+    width: 100%;
+}
+
+.primary:hover {
+    background: #1d4ed8;
+}
+
+.secondary {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.danger {
+    background: #dc2626;
+    color: white;
+}
+
+.success {
+    background: #16a34a;
+    color: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progress {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #2563eb;
+    transition: .3s;
+}
+
+.question-number {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.question {
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 20px 0;
+}
+
+.options {
+    display: grid;
+    gap: 12px;
+}
+
+.option {
+    padding: 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    font-size: 17px;
+    transition: .2s;
+}
+
+.option:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.option.selected {
+    border-color: #2563eb;
+    background: #dbeafe;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.timer {
+    background: #111827;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.timer.warning {
+    background: #dc2626;
+}
+
+.result-score {
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.result-message {
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 25px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    background: #f3f4f6;
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.category {
+    margin: 12px 0;
+}
+
+.category-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.category-bar {
+    height: 9px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.category-fill {
+    height: 100%;
+    background: #2563eb;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.admin-table th {
+    background: #f3f4f6;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer {
+    color: white;
+    text-align: center;
+    opacity: .7;
+    margin-top: 20px;
+}
+
+.instructions {
+    line-height: 1.7;
+}
+
+@media(max-width:600px) {
+    .logo h1 {
+        font-size: 32px;
+    }
+
+    .question {
+        font-size: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .navigation {
+        flex-direction: column;
+    }
+
+    .navigation button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>MANZUR TEST</h1>
+        <p>Test de raționament logic</p>
+    </div>
+
+    <!-- START -->
+    <section id="startScreen" class="card">
+
+        <h2>🧠 MANZUR TEST – IQ</h2>
+
+        <div class="instructions">
+            <p>
+                Vei avea de rezolvat <strong>40 de întrebări</strong>.
+            </p>
+
+            <ul>
+                <li>30 de minute</li>
+                <li>4 variante de răspuns</li>
+                <li>un singur răspuns corect</li>
+                <li>dificultatea crește progresiv</li>
+            </ul>
+
+            <p>
+                Răspunde cât mai atent. Rezultatul este un scor de
+                <strong>raționament</strong>, nu un diagnostic psihometric.
+            </p>
+        </div>
+
+        <label><strong>Numele și prenumele</strong></label>
+        <input id="studentName" type="text" placeholder="Ex.: Andrei Popescu">
+
+        <button class="primary" onclick="startTest()">
+            ÎNCEPE TESTUL
+        </button>
+
+        <hr style="margin:25px 0">
+
+        <button class="secondary" onclick="openAdmin()">
+            🔐 Panou profesor
+        </button>
+
+    </section>
+
+
+    <!-- TEST -->
+    <section id="testScreen" class="card hidden">
+
+        <div class="topbar">
+            <div>
+                <span class="question-number" id="questionNumber">
+                    Întrebarea 1 / 40
+                </span>
+            </div>
+
+            <div class="timer" id="timer">
+                30:00
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div id="categoryLabel"></div>
+
+        <div class="question" id="questionText"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="navigation">
+
+            <button class="secondary" id="prevBtn" onclick="previousQuestion()">
+                ← Înapoi
+            </button>
+
+            <button class="primary" id="nextBtn" onclick="nextQuestion()">
+                Următoarea →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT -->
+    <section id="resultScreen" class="card hidden">
+
+        <h2 style="text-align:center">
+            Rezultatul tău
+        </h2>
+
+        <div class="result-score" id="resultScore">
+            0/40
+        </div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="resultPercent">0%</strong>
+                Procent
+            </div>
+
+            <div class="stat">
+                <strong id="correctAnswers">0</strong>
+                Corecte
+            </div>
+
+            <div class="stat">
+                <strong id="wrongAnswers">0</strong>
+                Greșite
+            </div>
+
+            <div class="stat">
+                <strong id="resultTime">00:00</strong>
+                Timp
+            </div>
+
+        </div>
+
+        <h3>Rezultate pe categorii</h3>
+
+        <div id="categoryResults"></div>
+
+        <button class="primary" onclick="location.reload()">
+            FINALIZAT
+        </button>
+
+    </section>
+
+
+    <!-- ADMIN LOGIN -->
+    <section id="adminLogin" class="card hidden">
+
+        <h2>🔐 MANZUR TEST – Profesor</h2>
+
+        <p>
+            Introdu codul de acces.
+        </p>
+
+        <input
+            id="adminPin"
+            type="password"
+            placeholder="Cod profesor"
+        >
+
+        <button class="primary" onclick="checkAdmin()">
+            INTRĂ
+        </button>
+
+        <br><br>
+
+        <button class="secondary" onclick="backHome()">
+            ← Înapoi
+        </button>
+
+    </section>
+
+
+    <!-- ADMIN -->
+    <section id="adminScreen" class="card hidden">
+
+        <h2>📊 Rezultate MANZUR TEST</h2>
+
+        <div class="admin-buttons">
+
+            <button class="success" onclick="exportCSV()">
+                ⬇ Export CSV
+            </button>
+
+            <button class="danger" onclick="deleteResults()">
+                🗑 Șterge toate rezultatele
+            </button>
+
+            <button class="secondary" onclick="backHome()">
+                ← Acasă
+            </button>
+
+        </div>
+
+        <div id="adminStats" style="margin-top:20px"></div>
+
+        <div class="table-wrapper">
+
+            <table class="admin-table">
+
+                <thead>
+                    <tr>
+                        <th>Nume</th>
+                        <th>Scor</th>
+                        <th>%</th>
+                        <th>Timp</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+
+                <tbody id="resultsTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <div class="footer">
+        MANZUR TEST © 2026
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   MANZUR TEST
+   40 ÎNTREBĂRI
+===================================================== */
+
+const QUESTIONS = [
+
+/* 1 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 2, 4, 6, 8, ?",
+    options:["9","10","11","12"],
+    answer:1
+},
+
+/* 2 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 5, 10, 15, 20, ?",
+    options:["22","24","25","30"],
+    answer:2
+},
+
+/* 3 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 3, 6, 12, 24, ?",
+    options:["36","42","48","50"],
+    answer:2
+},
+
+/* 4 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 1, 4, 9, 16, ?",
+    options:["20","24","25","30"],
+    answer:2
+},
+
+/* 5 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 2, 5, 10, 17, 26, ?",
+    options:["35","36","37","38"],
+    answer:2
+},
+
+/* 6 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 81, 27, 9, 3, ?",
+    options:["1","0","2","6"],
+    answer:0
+},
+
+/* 7 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 4, 7, 13, 25, 49, ?",
+    options:["73","81","97","99"],
+    answer:2
+},
+
+/* 8 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 1, 1, 2, 3, 5, 8, ?",
+    options:["11","12","13","15"],
+    answer:2
+},
+
+/* 9 */
+{
+    category:"Logică",
+    q:"Toți câinii sunt animale. Rex este câine. Ce putem afirma sigur?",
+    options:[
+        "Rex este animal",
+        "Toate animalele sunt câini",
+        "Rex este pisică",
+        "Nimic"
+    ],
+    answer:0
+},
+
+/* 10 */
+{
+    category:"Logică",
+    q:"Ana este mai înaltă decât Maria. Maria este mai înaltă decât Ioana. Cine este cea mai scundă?",
+    options:["Ana","Maria","Ioana","Nu se poate determina"],
+    answer:2
+},
+
+/* 11 */
+{
+    category:"Logică",
+    q:"Dacă toate florile din cutie sunt roșii, iar trandafirul este în cutie, ce culoare are trandafirul?",
+    options:["Albastru","Roșu","Verde","Nu se știe"],
+    answer:1
+},
+
+/* 12 */
+{
+    category:"Logică",
+    q:"Trei copii au fiecare câte un animal: câine, pisică și iepure. Andrei nu are câine. Maria nu are iepure. Dacă Ioana are pisică, ce are Andrei?",
+    options:["Câine","Pisică","Iepure","Nu se poate determina"],
+    answer:2
+},
+
+/* 13 */
+{
+    category:"Analogii",
+    q:"Mână este pentru mănușă așa cum piciorul este pentru:",
+    options:["Șosetă","Pălărie","Cămașă","Centură"],
+    answer:0
+},
+
+/* 14 */
+{
+    category:"Analogii",
+    q:"Pasărea este pentru cuib așa cum albina este pentru:",
+    options:["Peșteră","Stup","Vizuină","Cușcă"],
+    answer:1
+},
+
+/* 15 */
+{
+    category:"Analogii",
+    q:"Doctorul este pentru spital așa cum profesorul este pentru:",
+    options:["Garaj","Școală","Farmacie","Magazin"],
+    answer:1
+},
+
+/* 16 */
+{
+    category:"Clasificare",
+    q:"Care element nu se potrivește?",
+    options:["Măr","Pară","Prună","Morcov"],
+    answer:3
+},
+
+/* 17 */
+{
+    category:"Clasificare",
+    q:"Care element nu aparține grupului?",
+    options:["Triunghi","Pătrat","Cerc","Cub"],
+    answer:3
+},
+
+/* 18 */
+{
+    category:"Clasificare",
+    q:"Care număr este diferit?",
+    options:["9","16","25","30"],
+    answer:3
+},
+
+/* 19 */
+{
+    category:"Raționament",
+    q:"Dacă 3 creioane costă 6 lei, cât costă 7 creioane?",
+    options:["12 lei","14 lei","16 lei","18 lei"],
+    answer:1
+},
+
+/* 20 */
+{
+    category:"Raționament",
+    q:"Un tren pleacă la ora 10:00 și călătoria durează 2 ore și 30 minute. La ce oră ajunge?",
+    options:["11:30","12:00","12:30","13:00"],
+    answer:2
+},
+
+/* 21 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 100, 90, 81, 73, 66, ?",
+    options:["60","59","58","57"],
+    answer:0
+},
+
+/* 22 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 2, 6, 18, 54, ?",
+    options:["108","126","162","216"],
+    answer:2
+},
+
+/* 23 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 64, 32, 16, 8, ?",
+    options:["2","4","6","1"],
+    answer:1
+},
+
+/* 24 */
+{
+    category:"Logică",
+    q:"Ion este mai mare decât Vasile. Gheorghe este mai mic decât Ion, dar mai mare decât Vasile. Cine este între cei doi?",
+    options:["Ion","Vasile","Gheorghe","Nu se poate determina"],
+    answer:2
+},
+
+/* 25 */
+{
+    category:"Logică",
+    q:"Patru persoane stau la coadă. Ana este înaintea lui Dan. Dan este înaintea lui Mihai. Cine nu poate fi primul?",
+    options:["Ana","Dan","Mihai","O altă persoană"],
+    answer:2
+},
+
+/* 26 */
+{
+    category:"Raționament",
+    q:"Dacă toate pătratele sunt dreptunghiuri, dar nu toate dreptunghiurile sunt pătrate, care afirmație este sigură?",
+    options:[
+        "Orice pătrat este dreptunghi",
+        "Orice dreptunghi este pătrat",
+        "Niciun pătrat nu este dreptunghi",
+        "Pătratele nu au laturi"
+    ],
+    answer:0
+},
+
+/* 27 */
+{
+    category:"Analogii",
+    q:"Rece este pentru cald așa cum mic este pentru:",
+    options:["Lung","Mare","Scurt","Subțire"],
+    answer:1
+},
+
+/* 28 */
+{
+    category:"Clasificare",
+    q:"Care număr nu respectă aceeași regulă? 4, 8, 12, 15, 20",
+    options:["4","8","12","15"],
+    answer:3
+},
+
+/* 29 */
+{
+    category:"Raționament",
+    q:"Un tată are 40 de ani, iar fiul său 10 ani. Peste câți ani tatăl va avea de două ori vârsta fiului?",
+    options:["10","15","20","25"],
+    answer:2
+},
+
+/* 30 */
+{
+    category:"Logică",
+    q:"Într-o familie sunt 3 surori. Fiecare soră are același frate. Câți copii sunt în familie?",
+    options:["3","4","6","7"],
+    answer:1
+},
+
+/* 31 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 1, 2, 6, 24, 120, ?",
+    options:["240","360","600","720"],
+    answer:3
+},
+
+/* 32 */
+{
+    category:"Serii numerice",
+    q:"Care este următorul număr? 7, 10, 16, 28, 52, ?",
+    options:["76","88","100","104"],
+    answer:2
+},
+
+/* 33 */
+{
+    category:"Logică",
+    q:"Cinci oameni se află într-o cameră. Fiecare salută fiecare persoană o singură dată. Câte saluturi au loc?",
+    options:["5","10","15","20"],
+    answer:1
+},
+
+/* 34 */
+{
+    category:"Logică",
+    q:"Ai trei cutii: una conține mere, una pere, una mere și pere. Etichetele sunt toate greșite. Din câte cutii trebuie să scoți minimum un fruct pentru a le identifica?",
+    options:["1","2","3","4"],
+    answer:0
+},
+
+/* 35 */
+{
+    category:"Raționament",
+    q:"Un ceas rămâne în urmă cu 5 minute în fiecare oră. După 6 ore, cu câte minute va fi în urmă?",
+    options:["20","25","30","35"],
+    answer:2
+},
+
+/* 36 */
+{
+    category:"Logică",
+    q:"Ai 8 bile identice ca aspect. Una este mai grea. Folosind o balanță, care este numărul minim de cântăriri necesare pentru a identifica bila mai grea?",
+    options:["1","2","3","4"],
+    answer:1
+},
+
+/* 37 */
+{
+    category:"Raționament",
+    q:"Un număr este mărit cu 20%, apoi micșorat cu 20%. Rezultatul este:",
+    options:[
+        "egal cu numărul inițial",
+        "mai mare decât numărul inițial",
+        "mai mic decât numărul inițial",
+        "imposibil de determinat"
+    ],
+    answer:2
+},
+
+/* 38 */
+{
+    category:"Logică",
+    q:"Ai două frânghii. Fiecare arde exact 60 de minute, dar neuniform. Cum poți măsura exact 45 de minute?",
+    options:[
+        "Aprinzi o frânghie la un capăt",
+        "Aprinzi prima frânghie la ambele capete și a doua la un capăt; când prima se termină, aprinzi și al doilea capăt al celei de-a doua",
+        "Aprinzi ambele frânghii la un capăt",
+        "Nu se poate"
+    ],
+    answer:1
+},
+
+/* 39 */
+{
+    category:"Raționament",
+    q:"Dacă A = 1, B = 2, C = 3 ... Z = 26, cât este suma literelor din cuvântul CAT?",
+    options:["22","24","25","26"],
+    answer:1
+},
+
+/* 40 */
+{
+    category:"Logică",
+    q:"Un fermier are găini și iepuri. Sunt 10 capete și 28 de picioare. Câți iepuri are?",
+    options:["3","4","5","6"],
+    answer:1
+}
+
+];
+
+
+/* =====================================================
+   VARIABILE
+===================================================== */
+
+let currentQuestion = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+let startTime = null;
+let timerInterval = null;
+let totalSeconds = 30 * 60;
+let remainingSeconds = totalSeconds;
+
+const ADMIN_PIN = "2026";
+
+
+/* =====================================================
+   START TEST
+===================================================== */
+
+function startTest() {
+
+    const name = document.getElementById("studentName").value.trim();
+
+    if (!name) {
+        alert("Te rog introdu numele și prenumele.");
+        return;
+    }
+
+    currentQuestion = 0;
+    answers = new Array(QUESTIONS.length).fill(null);
+
+    remainingSeconds = totalSeconds;
+    startTime = Date.now();
+
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("testScreen").classList.remove("hidden");
+
+    renderQuestion();
+    startTimer();
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startTimer() {
+
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+
+        remainingSeconds--;
+
+        updateTimer();
+
+        if (remainingSeconds <= 0) {
+
+            clearInterval(timerInterval);
+
+            alert("Timpul a expirat. Testul va fi trimis automat.");
+
+            finishTest();
+        }
+
+    }, 1000);
+}
+
+
+function updateTimer() {
+
+    const min = Math.floor(remainingSeconds / 60);
+    const sec = remainingSeconds % 60;
+
+    const timer = document.getElementById("timer");
+
+    timer.textContent =
+        String(min).padStart(2,"0") +
+        ":" +
+        String(sec).padStart(2,"0");
+
+    if (remainingSeconds <= 300) {
+        timer.classList.add("warning");
+    }
+}
+
+
+/* =====================================================
+   AFIȘARE ÎNTREBARE
+===================================================== */
+
+function renderQuestion() {
+
+    const q = QUESTIONS[currentQuestion];
+
+    document.getElementById("questionNumber").textContent =
+        `Întrebarea ${currentQuestion + 1} / ${QUESTIONS.length}`;
+
+    document.getElementById("categoryLabel").innerHTML =
+        `<strong>Categoria:</strong> ${q.category}`;
+
+    document.getElementById("questionText").textContent =
+        q.q;
+
+    const optionsContainer =
+        document.getElementById("options");
+
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "option";
+
+        if (answers[currentQuestion] === index) {
+            div.classList.add("selected");
+        }
+
+        div.textContent =
+            `${String.fromCharCode(65 + index)}. ${option}`;
+
+        div.onclick = () => selectAnswer(index);
+
+        optionsContainer.appendChild(div);
+
+    });
+
+    document.getElementById("prevBtn").disabled =
+        currentQuestion === 0;
+
+    document.getElementById("nextBtn").textContent =
+        currentQuestion === QUESTIONS.length - 1
+        ? "Finalizează testul"
+        : "Următoarea →";
+
+    const progress =
+        ((currentQuestion + 1) / QUESTIONS.length) * 100;
+
+    document.getElementById("progressBar").style.width =
+        progress + "%";
+}
+
+
+/* =====================================================
+   SELECTARE RĂSPUNS
+===================================================== */
+
+function selectAnswer(index) {
+
+    answers[currentQuestion] = index;
+
+    renderQuestion();
+}
+
+
+/* =====================================================
+   NAVIGARE
+===================================================== */
+
+function nextQuestion() {
+
+    if (answers[currentQuestion] === null) {
+
+        alert("Alege un răspuns înainte de a continua.");
+
+        return;
+    }
+
+    if (currentQuestion === QUESTIONS.length - 1) {
+
+        finishTest();
+
+        return;
+    }
+
+    currentQuestion++;
+
+    renderQuestion();
+}
+
+
+function previousQuestion() {
+
+    if (currentQuestion > 0) {
+
+        currentQuestion--;
+
+        renderQuestion();
+    }
+}
+
+
+/* =====================================================
+   FINAL TEST
+===================================================== */
+
+function finishTest() {
+
+    clearInterval(timerInterval);
+
+    const elapsed =
+        totalSeconds - remainingSeconds;
+
+    let score = 0;
+
+    QUESTIONS.forEach((q, i) => {
+
+        if (answers[i] === q.answer) {
+            score++;
+        }
+
+    });
+
+    const percent =
+        Math.round((score / QUESTIONS.length) * 100);
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const categories = {};
+
+    QUESTIONS.forEach((q, i) => {
+
+        if (!categories[q.category]) {
+
+            categories[q.category] = {
+                total: 0,
+                correct: 0
+            };
+
+        }
+
+        categories[q.category].total++;
+
+        if (answers[i] === q.answer) {
+            categories[q.category].correct++;
+        }
+
+    });
+
+    const result = {
+
+        id: Date.now(),
+
+        name: name,
+
+        score: score,
+
+        total: QUESTIONS.length,
+
+        percent: percent,
+
+        elapsed: elapsed,
+
+        date: new Date().toLocaleString("ro-RO"),
+
+        categories: categories
+
+    };
+
+    saveResult(result);
+
+    showResult(result);
+}
+
+
+/* =====================================================
+   SALVARE REZULTAT
+===================================================== */
+
+function saveResult(result) {
+
+    const results =
+        JSON.parse(
+            localStorage.getItem("manzurResults") || "[]"
+        );
+
+    results.push(result);
+
+    localStorage.setItem(
+        "manzurResults",
+        JSON.stringify(results)
+    );
+}
+
+
+/* =====================================================
+   AFIȘARE REZULTAT
+===================================================== */
+
+function showResult(result) {
+
+    document.getElementById("testScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("resultScore").textContent =
+        `${result.score}/${result.total}`;
+
+    document.getElementById("resultPercent").textContent =
+        `${result.percent}%`;
+
+    document.getElementById("correctAnswers").textContent =
+        result.score;
+
+    document.getElementById("wrongAnswers").textContent =
+        result.total - result.score;
+
+    document.getElementById("resultTime").textContent =
+        formatTime(result.elapsed);
+
+    let message = "";
+
+    if (result.percent >= 90) {
+        message = "Performanță foarte ridicată la acest test.";
+    } else if (result.percent >= 75) {
+        message = "Performanță bună la acest test.";
+    } else if (result.percent >= 60) {
+        message = "Rezultat bun, cu loc pentru îmbunătățire.";
+    } else if (result.percent >= 40) {
+        message = "Ai identificat o parte importantă dintre reguli.";
+    } else {
+        message = "Mai exersează și încearcă din nou.";
+    }
+
+    document.getElementById("resultMessage").textContent =
+        message;
+
+    const container =
+        document.getElementById("categoryResults");
+
+    container.innerHTML = "";
+
+    Object.entries(result.categories).forEach(
+        ([name, data]) => {
+
+            const percentage =
+                Math.round(
+                    data.correct / data.total * 100
+                );
+
+            container.innerHTML += `
+
+                <div class="category">
+
+                    <div class="category-name">
+                        <span>${name}</span>
+
+                        <strong>
+                            ${data.correct}/${data.total}
+                        </strong>
+                    </div>
+
+                    <div class="category-bar">
+
+                        <div
+                            class="category-fill"
+                            style="width:${percentage}%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+}
+
+
+function formatTime(seconds) {
+
+    const min = Math.floor(seconds / 60);
+
+    const sec = seconds % 60;
+
+    return (
+        String(min).padStart(2,"0") +
+        ":" +
+        String(sec).padStart(2,"0")
+    );
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function openAdmin() {
+
+    document.getElementById("startScreen")
+        .classList.add("hidden");
+
+    document.getElementById("adminLogin")
+        .classList.remove("hidden");
+}
+
+
+function checkAdmin() {
+
+    const pin =
+        document.getElementById("adminPin").value;
+
+    if (pin !== ADMIN_PIN) {
+
+        alert("Cod incorect.");
+
+        return;
+    }
+
+    document.getElementById("adminLogin")
+        .classList.add("hidden");
+
+    document.getElementById("adminScreen")
+        .classList.remove("hidden");
+
+    renderAdmin();
+}
+
+
+function renderAdmin() {
+
+    const results =
+        JSON.parse(
+            localStorage.getItem("manzurResults") || "[]"
+        );
+
+    const table =
+        document.getElementById("resultsTable");
+
+    table.innerHTML = "";
+
+    if (results.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    Nu există încă rezultate.
+                </td>
+            </tr>
+        `;
+
+    } else {
+
+        results
+            .slice()
+            .reverse()
+            .forEach(result => {
+
+                table.innerHTML += `
+
+                    <tr>
+
+                        <td>${escapeHTML(result.name)}</td>
+
+                        <td>
+                            <strong>
+                                ${result.score}/${result.total}
+                            </strong>
+                        </td>
+
+                        <td>${result.percent}%</td>
+
+                        <td>${formatTime(result.elapsed)}</td>
+
+                        <td>${result.date}</td>
+
+                    </tr>
+
+                `;
+
+            });
+    }
+
+    const average = results.length
+        ? Math.round(
+            results.reduce(
+                (sum,r) => sum + r.percent,
+                0
+            ) / results.length
+        )
+        : 0;
+
+    document.getElementById("adminStats").innerHTML = `
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>${results.length}</strong>
+                Teste efectuate
+            </div>
+
+            <div class="stat">
+                <strong>${average}%</strong>
+                Media procentajelor
+            </div>
+
+            <div class="stat">
+                <strong>${results.length
+                    ? Math.max(...results.map(r => r.percent))
+                    : 0}%</strong>
+                Cel mai mare procent
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* =====================================================
+   EXPORT CSV
+===================================================== */
+
+function exportCSV() {
+
+    const results =
+        JSON.parse(
+            localStorage.getItem("manzurResults") || "[]"
+        );
+
+    if (!results.length) {
+
+        alert("Nu există rezultate de exportat.");
+
+        return;
+    }
+
+    let csv =
+        "Nume,Scor,Total,Procent,Timp,Data\n";
+
+    results.forEach(r => {
+
+        csv +=
+            `"${r.name}",` +
+            `${r.score},` +
+            `${r.total},` +
+            `${r.percent}%,` +
+            `${formatTime(r.elapsed)},` +
+            `"${r.date}"\n`;
+
+    });
+
+    const blob =
+        new Blob(
+            ["\ufeff" + csv],
+            {type:"text/csv;charset=utf-8;"}
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        "MANZUR_TEST_rezultate.csv";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+
+/* =====================================================
+   ȘTERGERE REZULTATE
+===================================================== */
+
+function deleteResults() {
+
+    const confirmDelete =
+        confirm(
+            "Sigur vrei să ștergi TOATE rezultatele?"
+        );
+
+    if (!confirmDelete) return;
+
+    localStorage.removeItem("manzurResults");
+
+    renderAdmin();
+}
+
+
+/* =====================================================
+   ÎNAPOI
+===================================================== */
+
+function backHome() {
+
+    document.getElementById("adminLogin")
+        .classList.add("hidden");
+
+    document.getElementById("adminScreen")
+        .classList.add("hidden");
+
+    document.getElementById("startScreen")
+        .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   PROTECȚIE TEXT
+===================================================== */
+
+function escapeHTML(text) {
+
+    return text
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+</script>
+
+</body>
+</html>
